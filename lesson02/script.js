@@ -10,15 +10,14 @@
 */
 // alert ('hello');
 let num = 266219;
-let num1 = num;
-let p = 1;
-let p1 = num % 10;
-
-while ( !(p1 < 1) ) {
-  p *= p1;
-  num1 = Math.trunc(num1/10);
-  console.log('num1: ', num1);
-  p1 = num1 % 10;
+let numbersProduct = 1;
+for (let i = num; i%10 >= 1; i = Math.trunc(i/10)) {
+  numbersProduct *= i%10;
 }
+console.log('Произведение цифр числа ' + num + ' равно: ', numbersProduct);
 
-console.log('Произведение цифр числа ' + num + ' равно: ', p);
+let num1 = numbersProduct ** 3;
+console.log('Третья степень числа ' + numbersProduct + ' равна: ', num1);
+
+let num3 = String(num1).substring(0, 2);
+console.log('Первые две цифры числа ' + num1 + ' : ', num3);

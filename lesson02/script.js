@@ -10,21 +10,9 @@
 */
 // alert ('hello');
 let num = 266219;
-<<<<<<< HEAD
-let num1 = num;
-let p = 1;
-let p1 = num % 10;
-
-while ( p1 >= 1 ) {
-  p *= p1;
-  num1 = Math.trunc(num1/10);
-  console.log('num1: ', num1);
-  p1 = num1 % 10;
-=======
 let numbersProduct = 1;
 for (let i = num; i%10 >= 1; i = Math.trunc(i/10)) {
   numbersProduct *= i%10;
->>>>>>> ccb3156446a8ca5953560deea1c9cf5bfed718f6
 }
 console.log('Произведение цифр числа ' + num + ' равно: ', numbersProduct);
 

@@ -14,7 +14,7 @@ let num1 = num;
 let p = 1;
 let p1 = num % 10;
 
-while ( !(p1 < 1) ) {
+while ( p1 >= 1 ) {
   p *= p1;
   num1 = Math.trunc(num1/10);
   console.log('num1: ', num1);

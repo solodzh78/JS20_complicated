@@ -32,20 +32,22 @@ let week = [
 ];
 
 let body = document.querySelector('body');
+const dayNow = () => {
+  const now = new Date().getDay();
+  if (now === 0) {
+    return 6;
+  } else {return now - 1;}
+};
 
 week.forEach((value, index) => {
-  let day = getElement('p',{
-    
+  let day = getElement('div',{
     textContent: value
   });
-  if (value === 'пятница') {
+  if (index === dayNow()) {
     day.style['font-weight'] = 'bold';
   }
-  if (value === 'суббота' || value === 'воскресенье') {
+  if (index === 5 || index === 6) {
     day.style['font-style'] = 'italic';
   }
-  
-
-  console.dir('day: ', day);
   body.append(day);
 });

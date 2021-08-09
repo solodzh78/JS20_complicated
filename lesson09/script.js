@@ -24,49 +24,78 @@ const getElement = (tagName, atributes) => {
 	return element;
 };
 
-let week = [
-  'понедельник',
-  'вторник',
-  'среда',
-  'четверг',
-  'пятница',
-  'суббота',
-  'воскресенье'
-];
-
-let body = document.querySelector('body');
-const now = new Date();
-
-const options = {
-  // era: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  weekday: 'long',
-  timezone: 'UTC',
-  hour: 'numeric',
-  minute: 'numeric',
-  second: 'numeric'
+const getNowObj = (now) => {
+  return {  
+    year: now.getFullYear(),
+    month: now.getMonth(),
+    day: now.getDate(),
+    dayMonthLong: now.toLocaleString("ru", {month: 'long', day: 'numeric',}),
+    weekday:  now.toLocaleString("ru", {weekday: 'long'})[0].toUpperCase() + 
+              now.toLocaleString("ru", {weekday: 'long'}).slice(1),
+    hour: now.getHours(),
+    minute: now.getMinutes(),
+    second: now.getSeconds()
+  };
 };
-console.log(now.toLocaleString("ru", options)); // понедельник, 9 августа 2021 г. от Рождества Христова, 07:20:50
 
+const addHour = (hour) => {
 
+  if (hour > 4 && hour < 21 || hour === 0){
+    return 'ов';
+  } else if (hour%10 === 1) {
+    return '';
+  } else if (hour%10 > 1 && hour%10 < 5) {
+    return 'а';
+  }  
+};
 
-/* const dayNow = () => {
-  if (now === 0) {
-    return 6;
-  } else {return now - 1;}
-}; */
+const addMinute = (minute) => {
 
-/* week.forEach((value, index) => {
-  let day = getElement('div',{
-    textContent: value
-  });
-  if (index === dayNow()) {
-    day.style['font-weight'] = 'bold';
-  }
-  if (index === 5 || index === 6) {
-    day.style['font-style'] = 'italic';
-  }
-  body.append(day);
-}); */
+  if (minute > 4 && minute < 21 || minute%10 > 4 && minute%10 < 10|| minute%10 === 0){
+    return '';
+  } else if (minute%10 === 1) {
+    return 'а';
+  } else if (minute%10 > 1 && minute%10 < 5) {
+    return 'ы';
+  }  
+};
+
+const addSecond = (second) => {
+
+  if (second > 4 && second < 21 || second%10 > 4 && second%10 < 10|| second%10 === 0){
+    return '';
+  } else if (second%10 === 1) {
+    return 'а';
+  } else if (second%10 > 1 && second%10 < 5) {
+    return 'ы';
+  }  
+};
+
+const typeA = (nowObj) => {
+  let str =  
+  `Сегодня ${nowObj.weekday}, ${nowObj.dayMonthLong} ${nowObj.year} года, ` + 
+  `${nowObj.hour} час${addHour(nowObj.hour)} ${nowObj.minute} минут${addMinute(nowObj.minute)} ` +
+  `${nowObj.second} секунд${addSecond(nowObj.second)}`;
+  return str;
+};
+
+const addZero = (n) => n < 10 ? '0' + n : n;
+
+const typeB = (nowObj) => {
+  let str =`${addZero(nowObj.day)}.${addZero(nowObj.month)}.${nowObj.year} - ` +
+  `${addZero(nowObj.hour)}:${addZero(nowObj.minute)}:${addZero(nowObj.second)}`;
+  return str;
+};
+
+// ============================================================================================================
+let body = document.querySelector('body');
+let blokA = getElement('div'),
+    blokB = getElement('div');
+body.append(blokA, blokB); 
+
+let timer = setInterval(() => {
+  let now = new Date();
+  let nowObj = getNowObj(now);
+  blokA.textContent = typeA(nowObj);
+  blokB.textContent = typeB(nowObj);
+}, 1000,);

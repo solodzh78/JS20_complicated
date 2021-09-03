@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+<select id="currency">
+    <option value="no">Выберите валюту</option>
+    <option value="usd">USD</option>
+    <option value="eur">EUR</option>
+</select>
+
+<select id="direction">
+    <option value="no">Продать/Купить</option>
+    <option value="sell">Продать</option>
+    <option value="bay">Купить</option>
+</select>
+<button id="btn">Конвертировать</button>
+<br>
+<label for="in">Отдаете</label>
+<input type="text" id="in">
+<span class="in"></span>
+<br>
+<label for="out">Получаете</label>
+<input type="text" id="out" readonly>
+<span class="out"></span>
+
+
+<script src="script.js"></script>
+</body>
+
+</html>
